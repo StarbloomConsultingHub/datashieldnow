@@ -57,7 +57,8 @@ export default async function handler(req, res) {
           },
           body: JSON.stringify({ scanId, name, email }),
         });
-        qstashResult = qres.ok ? 'ok' : 'http_' + qres.status;
+        const qstashBody = await qres.text().catch(()=>'');
+        qstashResult = qres.ok ? 'ok' : ('http_' + qres.status + ': ' + qstashBody.substring(0, 100));
       } catch (qerr) {
         qstashResult = 'error_' + qerr.message;
       }
