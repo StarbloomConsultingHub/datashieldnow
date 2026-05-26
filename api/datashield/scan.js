@@ -42,12 +42,12 @@ export default async function handler(req, res) {
       `;
     }
 
-    // 3. Enqueue to QStash
+    // 3. Enqueue to QStash — use us-east-1 endpoint to match token region
     const qstashToken = process.env.QSTASH_TOKEN;
     const baseUrl = process.env.VERCEL_URL || 'datashieldnow.com';
     const workerUrl = `https://${baseUrl}/api/datashield/worker`;
     if (qstashToken) {
-      const qstashRes = await fetch('https://qstash.upstash.io/v2/publish/' + encodeURIComponent(workerUrl), {
+      const qstashRes = await fetch('https://qstash-us-east-1.upstash.io/v2/publish/' + encodeURIComponent(workerUrl), {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${qstashToken}`,
