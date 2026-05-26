@@ -48,7 +48,7 @@ export default async function handler(req, res) {
     let qstashResult = 'no_qstash_token';
     if (qstashToken) {
       try {
-        const qres = await fetch('https://qstash-us-east-1.upstash.io/v2/publish/' + encodeURIComponent(workerUrl), {
+        const qres = await fetch('https://qstash-us-east-1.upstash.io/v2/publish/https://datashieldnow.com/api/datashield/worker', {
           method: 'POST',
           headers: {
             'Authorization': `Bearer ${qstashToken}`,
