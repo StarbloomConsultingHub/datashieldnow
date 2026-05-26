@@ -42,18 +42,20 @@ export default async function handler(req, res) {
       `;
     }
 
-    // 3. Enqueue to QStash — triggers the background worker
+    // 3. Enqueue to QStash — must await before returning (runtime terminates pending promises)
     const qstashToken = process.env.QSTASH_TOKEN;
     if (qstashToken) {
-      fetch('https://qstash-us-east-1.upstash.io/v2/publish/https://datashieldnow.com/api/datashield/worker', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${qstashToken}`,
-          'Content-Type': 'application/json',
-          'Upstash-Timeout': '120s',
-        },
-        body: JSON.stringify({ scanId, name, email }),
-      });
+      try {
+        await fetch('https://qstash-us-east-1.upstash.io/v2/publish/https://datashieldnow.com/api/datashield/worker', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${qstashToken}`,
+            'Content-Type': 'application/json',
+            'Upstash-Timeout': '120s',
+          },
+          body: JSON.stringify({ scanId, name, email }),
+        });
+      } catch (_) {}
     }
 
     // 4. Return 200 immediately
