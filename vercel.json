@@ -28,8 +28,14 @@
   ],
   "rewrites": [],
   "functions": {
-    "api/**/*.js": {
-      "maxDuration": 300
+    "api/datashield/worker.js": {
+      "maxDuration": 120
+    },
+    "api/datashield/scan.js": {
+      "maxDuration": 30
+    },
+    "api/datashield/status.js": {
+      "maxDuration": 10
     }
   }
 }

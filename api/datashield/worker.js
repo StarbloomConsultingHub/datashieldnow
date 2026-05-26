@@ -1,24 +1,56 @@
 // DataShield — POST /api/datashield/worker
-// Called by Upstash QStash — runs Playwright scans, updates DB per-site
-// Can run up to 5 minutes (set by QStash timeout)
+// Called by Upstash QStash — scans broker sites via Jina Reader AI
+// No Playwright needed — Jina handles JS rendering server-side
+// Returns immediately, updates exposures table per-site for real-time polling
 
 import { neon } from '@neondatabase/serverless';
-import { chromium } from '@playwright/test';
 
 const sql = neon(process.env.DATABASE_URL);
+const JINA_API_KEY = process.env.JINA_API_KEY;
+const JINA_BASE = 'https://r.jina.ai';
 
 const BROKERS = [
-  { name: 'Spokeo', scanUrl: (f, l) => `https://www.spokeo.com/${f}-${l}` },
-  { name: 'BeenVerified', scanUrl: (f, l) => `https://www.beenverified.com/people/${f}-${l}/` },
-  { name: 'Whitepages', scanUrl: (f, l) => `https://www.whitepages.com/name/${f}-${l}` },
-  { name: 'Intelius', scanUrl: (f, l) => `https://www.intelius.com/people-search/${f}-${l}` },
-  { name: 'MyLife', scanUrl: (f, l) => `https://www.mylife.com/${f}${l}` },
-  { name: 'FamilyTreeNow', scanUrl: (f, l) => `https://www.familytreenow.com/search?first=${f}&last=${l}` },
-  { name: 'PeekYou', scanUrl: (f, l) => `https://peekyou.com/${f}_${l}` },
-  { name: 'Radaris', scanUrl: (f, l) => `https://radaris.com/p/${f}/${l}/` },
-  { name: 'TruePeopleSearch', scanUrl: (f, l) => `https://www.truepeoplesearch.com/results?name=${f}%20${l}` },
-  { name: 'FastPeopleSearch', scanUrl: (f, l) => `https://www.fastpeoplesearch.com/name/${f}-${l}` },
+  { name: 'Spokeo', url: (f, l) => `https://www.spokeo.com/${f}-${l}`, type: 'name_search' },
+  { name: 'BeenVerified', url: (f, l) => `https://www.beenverified.com/people/${f}-${l}/`, type: 'name_search' },
+  { name: 'Whitepages', url: (f, l) => `https://www.whitepages.com/name/${f}-${l}`, type: 'name_search' },
+  { name: 'Intelius', url: (f, l) => `https://www.intelius.com/people-search/${f}-${l}`, type: 'name_search' },
+  { name: 'MyLife', url: (f, l) => `https://www.mylife.com/${f}${l}`, type: 'name_search' },
+  { name: 'FamilyTreeNow', url: (f, l) => `https://www.familytreenow.com/search?first=${f}&last=${l}`, type: 'name_search' },
+  { name: 'PeekYou', url: (f, l) => `https://peekyou.com/${f}_${l}`, type: 'name_search' },
+  { name: 'Radaris', url: (f, l) => `https://radaris.com/p/${f}/${l}/`, type: 'name_search' },
+  { name: 'TruePeopleSearch', url: (f, l) => `https://www.truepeoplesearch.com/results?name=${f}%20${l}`, type: 'name_search' },
+  { name: 'FastPeopleSearch', url: (f, l) => `https://www.fastpeoplesearch.com/name/${f}-${l}`, type: 'name_search' },
 ];
+
+// Detection logic — same as the Playwright scanner but works on rendered text
+function detectExposure(pageText, userName, userEmail) {
+  const lower = pageText.toLowerCase();
+  const nameLower = userName.toLowerCase();
+
+  // Negative indicators first — no results page
+  if (/no results found|0 results|no records found|we couldn't find|did not match any records|enter a name to get started/i.test(lower)) {
+    return { found: false, status: 'not_found', notes: 'No record found' };
+  }
+
+  // Captcha or block
+  if (lower.includes('captcha') || lower.includes('verify you are human') || lower.includes('cf-browser-verify') || lower.includes('challenge-platform')) {
+    return { found: false, status: 'blocked', notes: 'Bot detection or captcha triggered' };
+  }
+
+  // Positive indicators — data found
+  const hasName = lower.includes(nameLower) || lower.includes(userEmail.toLowerCase());
+  const hasResultIndicator = /profile|record found|results for|view details|unlock report|see full profile|background report|people search results|matches found|possible matches|possible relatives|phone|address history|age|also known as|related to/i.test(lower);
+
+  if (hasName && hasResultIndicator) {
+    return { found: true, status: 'exposed', notes: 'Personal data found on site' };
+  }
+
+  if (hasName) {
+    return { found: true, status: 'exposed', notes: 'Name or email appears on site' };
+  }
+
+  return { found: false, status: 'not_found', notes: 'No clear match on page' };
+}
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -33,14 +65,6 @@ export default async function handler(req, res) {
   // Update scan status to running
   await sql`UPDATE scans SET status = 'running' WHERE id = ${scanId}`;
 
-  // Launch browser
-  const browser = await chromium.launch({ headless: true });
-  const context = await browser.newContext({
-    userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36',
-    viewport: { width: 1280, height: 800 },
-  });
-  const page = await context.newPage();
-
   const nameParts = name.trim().split(/\s+/);
   const firstName = nameParts[0] || '';
   const lastName = nameParts.slice(1).join(' ') || '';
@@ -48,45 +72,38 @@ export default async function handler(req, res) {
 
   try {
     for (const broker of BROKERS) {
-      // Mark as currently scanning
+      // Mark as scanning
       await sql`
         UPDATE exposures SET status = 'scanning'
         WHERE scan_id = ${scanId} AND site = ${broker.name}
       `;
 
-      const url = broker.scanUrl(firstName, lastName);
       let siteResult = { status: 'error', found: false, notes: '' };
 
       try {
-        await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 15000 });
-        await page.waitForTimeout(2000); // Let JS render
+        const targetUrl = broker.url(firstName, lastName);
+        console.log(`[Worker] ${broker.name}: fetching ${targetUrl}`);
 
-        const content = await page.textContent('body');
-        const lower = content.toLowerCase();
-        const nameLower = name.toLowerCase();
+        // Jina Reader request
+        const jinaRes = await fetch(`${JINA_BASE}/${encodeURIComponent(targetUrl)}`, {
+          headers: {
+            'Authorization': `Bearer ${JINA_API_KEY}`,
+            'X-Return-Format': 'markdown',
+            'X-With-Links-Summary': 'true',
+          },
+          signal: AbortSignal.timeout(20000),
+        });
 
-        // Detect captcha/bot blocks
-        if (lower.includes('captcha') || lower.includes('robot') || lower.includes('verify you are human')) {
-          siteResult = { status: 'blocked', found: false, notes: 'Captcha or bot detection triggered' };
-        }
-        // Detect no results
-        else if (/no results found|0 results|no records found|we couldn't find|did not match any records|enter a name to get started/i.test(lower)) {
-          siteResult = { status: 'not_found', found: false, notes: 'No record found' };
-        }
-        // Detect exposure — name present plus positive indicators
-        else {
-          const hasNameInPage = lower.includes(nameLower) || lower.includes(email.toLowerCase());
-          const hasResultIndicator = /profile|record found|results for|view details|unlock report|see full profile|background report|people search results|matches found|possible matches|possible relatives|phone|address history/i.test(lower);
-
-          if (hasNameInPage && hasResultIndicator) {
-            siteResult = { status: 'exposed', found: true, notes: 'Personal data found on profile page' };
-          } else if (hasNameInPage) {
-            siteResult = { status: 'exposed', found: true, notes: 'Name appears on site' };
-          } else {
-            siteResult = { status: 'not_found', found: false, notes: 'No clear match' };
-          }
+        if (!jinaRes.ok) {
+          const errText = await jinaRes.text().catch(() => '');
+          console.warn(`[Worker] ${broker.name}: Jina returned ${jinaRes.status}`);
+          siteResult = { status: 'error', found: false, notes: `Jina HTTP ${jinaRes.status}` };
+        } else {
+          const text = await jinaRes.text();
+          siteResult = detectExposure(text, name, email);
         }
       } catch (err) {
+        console.warn(`[Worker] ${broker.name}: error - ${err.message.substring(0, 100)}`);
         siteResult = { status: 'error', found: false, notes: err.message.substring(0, 200) };
       }
 
@@ -100,16 +117,13 @@ export default async function handler(req, res) {
         WHERE scan_id = ${scanId} AND site = ${broker.name}
       `;
 
-      console.log(`[Worker] ${broker.name}: ${siteResult.status}`);
+      console.log(`[Worker] ${broker.name}: ${siteResult.status}${siteResult.found ? ' (found)' : ''}`);
 
       summary.total++;
       if (siteResult.status === 'exposed') summary.exposed++;
       else if (siteResult.status === 'not_found') summary.cleared++;
       else if (siteResult.status === 'blocked') summary.blocked++;
       else summary.errors++;
-
-      // Brief pause between sites
-      await page.waitForTimeout(1000);
     }
 
     // Mark scan complete
@@ -121,7 +135,7 @@ export default async function handler(req, res) {
       WHERE id = ${scanId}
     `;
 
-    console.log(`[Worker] Scan ${scanId} complete — ${summary.exposed} exposed, ${summary.cleared} clear`);
+    console.log(`[Worker] Scan ${scanId} complete — ${summary.exposed} exposed, ${summary.cleared} clear, ${summary.blocked} blocked`);
 
   } catch (err) {
     console.error(`[Worker] Scan ${scanId} failed:`, err.message);
@@ -132,8 +146,6 @@ export default async function handler(req, res) {
           summary = ${JSON.stringify({ error: err.message })}::jsonb
       WHERE id = ${scanId}
     `;
-  } finally {
-    await browser.close();
   }
 
   return res.status(200).json({ ok: true });

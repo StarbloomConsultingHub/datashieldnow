@@ -2,6 +2,7 @@
 // Vercel Serverless Function
 // Returns scan metadata + per-site exposure status for frontend polling
 
+// Neon serverless driver — Vercel edge compatible
 import { neon } from '@neondatabase/serverless';
 
 const sql = neon(process.env.DATABASE_URL);

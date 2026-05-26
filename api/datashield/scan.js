@@ -1,7 +1,8 @@
 // DataShield — POST /api/datashield/scan
 // Vercel Serverless Function
-// Returns 200 immediately with UUID scan_id, offloads Playwright to Upstash QStash
+// Returns 200 immediately with UUID scan_id, offloads Jina AI scraping to Upstash QStash
 
+// Neon serverless driver — Vercel edge compatible
 import { neon } from '@neondatabase/serverless';
 
 const sql = neon(process.env.DATABASE_URL);
@@ -17,8 +18,13 @@ export default async function handler(req, res) {
   }
 
   try {
-    // 1. Create scan record with UUID
-    const scanId = crypto.randomUUID();
+    // 1. Create scan record with UUID (Node 19+ compat: fallback for <19)
+    const scanId = crypto.randomUUID ? crypto.randomUUID() :
+      'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
+        const r = Math.random() * 16 | 0;
+        return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+      });
+    // Postgres already has pgcrypto extension from schema migration
     await sql`
       INSERT INTO scans (id, customer_name, customer_email, status, started_at)
       VALUES (${scanId}, ${name}, ${email}, 'pending', NOW())
@@ -38,7 +44,8 @@ export default async function handler(req, res) {
 
     // 3. Enqueue to QStash
     const qstashToken = process.env.QSTASH_TOKEN;
-    const workerUrl = `${process.env.VERCEL_URL}/api/datashield/worker`;
+    const baseUrl = process.env.VERCEL_URL || 'datashieldnow.com';
+    const workerUrl = `https://${baseUrl}/api/datashield/worker`;
     if (qstashToken) {
       const qstashRes = await fetch('https://qstash.upstash.io/v2/publish/' + encodeURIComponent(workerUrl), {
         method: 'POST',
