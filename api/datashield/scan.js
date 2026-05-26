@@ -42,24 +42,21 @@ export default async function handler(req, res) {
       `;
     }
 
-    // 3. Enqueue to QStash — publish to datashieldnow.com directly
+    // 3. Enqueue to QStash — fire-and-forget, no await so response returns fast
     const qstashToken = process.env.QSTASH_TOKEN;
     const workerUrl = 'https://datashieldnow.com/api/datashield/worker';
     if (qstashToken) {
-      const qstashRes = await fetch('https://qstash-us-east-1.upstash.io/v2/publish/' + encodeURIComponent(workerUrl), {
+      fetch('https://qstash-us-east-1.upstash.io/v2/publish/' + encodeURIComponent(workerUrl), {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${qstashToken}`,
           'Content-Type': 'application/json',
-          'Upstash-Timeout': '300s',
+          'Upstash-Timeout': '120s',
         },
         body: JSON.stringify({ scanId, name, email }),
+      }).catch(err => {
+        console.error('[Scan] QStash enqueue failed:', err.message);
       });
-      if (!qstashRes.ok) {
-        console.warn('[Scan] QStash enqueue warning:', await qstashRes.text());
-      }
-    } else {
-      console.warn('[Scan] No QSTASH_TOKEN configured — scan queued but no worker will run');
     }
 
     // 4. Return 200 immediately
