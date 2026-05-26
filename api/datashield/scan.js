@@ -52,7 +52,7 @@ export default async function handler(req, res) {
         headers: {
           'Authorization': `Bearer ${qstashToken}`,
           'Content-Type': 'application/json',
-          'Upstash-Timeout': '300',
+          'Upstash-Timeout': '300s',
         },
         body: JSON.stringify({ scanId, name, email }),
       });
