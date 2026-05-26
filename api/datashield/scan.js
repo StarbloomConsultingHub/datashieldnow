@@ -42,21 +42,26 @@ export default async function handler(req, res) {
       `;
     }
 
-    // 3. Enqueue to QStash — fire-and-forget, no await so response returns fast
+    // 3. Enqueue to QStash — must await before returning (runtime may terminate otherwise)
     const qstashToken = process.env.QSTASH_TOKEN;
     const workerUrl = 'https://datashieldnow.com/api/datashield/worker';
     if (qstashToken) {
-      fetch('https://qstash-us-east-1.upstash.io/v2/publish/' + encodeURIComponent(workerUrl), {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${qstashToken}`,
-          'Content-Type': 'application/json',
-          'Upstash-Timeout': '120s',
-        },
-        body: JSON.stringify({ scanId, name, email }),
-      }).catch(err => {
-        console.error('[Scan] QStash enqueue failed:', err.message);
-      });
+      try {
+        const qres = await fetch('https://qstash-us-east-1.upstash.io/v2/publish/' + encodeURIComponent(workerUrl), {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${qstashToken}`,
+            'Content-Type': 'application/json',
+            'Upstash-Timeout': '120s',
+          },
+          body: JSON.stringify({ scanId, name, email }),
+        });
+        if (!qres.ok) {
+          console.error('[Scan] QStash returned', qres.status, await qres.text().catch(()=>''));
+        }
+      } catch (qerr) {
+        console.error('[Scan] QStash enqueue failed:', qerr.message);
+      }
     }
 
     // 4. Return 200 immediately
