@@ -1,0 +1,70 @@
+// DataShield — POST /api/datashield/scan
+// Vercel Serverless Function
+// Returns 200 immediately with UUID scan_id, offloads Playwright to Upstash QStash
+
+import { neon } from '@neondatabase/serverless';
+
+const sql = neon(process.env.DATABASE_URL);
+
+export default async function handler(req, res) {
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  const { name, email } = req.body;
+  if (!name || !email) {
+    return res.status(400).json({ error: 'name and email required' });
+  }
+
+  try {
+    // 1. Create scan record with UUID
+    const scanId = crypto.randomUUID();
+    await sql`
+      INSERT INTO scans (id, customer_name, customer_email, status, started_at)
+      VALUES (${scanId}, ${name}, ${email}, 'pending', NOW())
+    `;
+
+    // 2. Pre-insert exposure rows for all broker sites
+    const brokers = [
+      'Spokeo', 'BeenVerified', 'Whitepages', 'Intelius', 'MyLife',
+      'FamilyTreeNow', 'PeekYou', 'Radaris', 'TruePeopleSearch', 'FastPeopleSearch'
+    ];
+    for (const site of brokers) {
+      await sql`
+        INSERT INTO exposures (scan_id, site, status)
+        VALUES (${scanId}, ${site}, 'pending')
+      `;
+    }
+
+    // 3. Enqueue to QStash
+    const qstashToken = process.env.QSTASH_TOKEN;
+    const workerUrl = `${process.env.VERCEL_URL}/api/datashield/worker`;
+    if (qstashToken) {
+      const qstashRes = await fetch('https://qstash.upstash.io/v2/publish/' + encodeURIComponent(workerUrl), {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${qstashToken}`,
+          'Content-Type': 'application/json',
+          'Upstash-Timeout': '300',
+        },
+        body: JSON.stringify({ scanId, name, email }),
+      });
+      if (!qstashRes.ok) {
+        console.warn('[Scan] QStash enqueue warning:', await qstashRes.text());
+      }
+    } else {
+      console.warn('[Scan] No QSTASH_TOKEN configured — scan queued but no worker will run');
+    }
+
+    // 4. Return 200 immediately
+    return res.status(200).json({
+      ok: true,
+      scan_id: scanId,
+      sites: brokers.length,
+    });
+
+  } catch (err) {
+    console.error('[Scan] Error:', err);
+    return res.status(500).json({ error: 'Internal server error' });
+  }
+}

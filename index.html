@@ -337,8 +337,6 @@
       'FamilyTreeNow', 'PeekYou', 'Radaris', 'TruePeopleSearch', 'FastPeopleSearch'
     ];
 
-    let currentScanId = null;
-
     // Render broker results grid
     function renderGrid() {
       const grid = document.getElementById('resultsGrid');
@@ -372,7 +370,6 @@
       statusEl.textContent = status.charAt(0).toUpperCase() + status.slice(1);
       if (detail) detailEl.textContent = detail;
 
-      // Color the card edge
       const card = document.getElementById(`card-${key}`);
       if (card) {
         const colors = {
@@ -389,7 +386,7 @@
       }
     }
 
-    // Start scan
+    // Start scan — POST returns UUID scan_id, then poll
     async function startScan() {
       const name = document.getElementById('scanName').value.trim();
       const email = document.getElementById('scanEmail').value.trim();
@@ -397,79 +394,94 @@
 
       const btn = document.getElementById('scanBtn');
       btn.disabled = true;
-      btn.textContent = '⏳ Scanning...';
+      btn.textContent = 'Scanning...';
 
-      // Reset UI
       document.getElementById('summaryBanner').classList.remove('show');
       document.getElementById('progressWrap').classList.add('show');
+      document.getElementById('progressText').textContent = 'Starting scan...';
       BROKER_SITES.forEach(s => updateCard(s, 'pending', 'Waiting...'));
 
-      const res = await fetch('/api/datashield/scan', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email })
-      });
-      const data = await res.json();
-      if (!data.ok) return alert('Error: ' + data.error);
-
-      currentScanId = data.scanId;
-
-      // Poll for results
-      pollScan(data.scanId);
+      try {
+        const res = await fetch('/api/datashield/scan', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email }),
+        });
+        const data = await res.json();
+        if (!data.ok) {
+          alert('Error: ' + data.error);
+          btn.disabled = false;
+          btn.textContent = 'Scan Now';
+          return;
+        }
+        // data.scan_id is a UUID — no sequential guessing
+        pollScan(data.scan_id);
+      } catch (err) {
+        alert('Network error: ' + err.message);
+        btn.disabled = false;
+        btn.textContent = 'Scan Now';
+      }
     }
 
+    // Poll status endpoint every 2 seconds
     async function pollScan(scanId) {
-      const maxAttempts = 120; // 2 min
-      let attempts = 0;
-
       const iv = setInterval(async () => {
-        attempts++;
-        const res = await fetch(`/api/datashield/scan/${scanId}`);
-        const data = await res.json();
-        if (data.error) { clearInterval(iv); return; }
+        try {
+          const res = await fetch(`/api/datashield/status?scan_id=${scanId}`);
+          const data = await res.json();
+          if (data.error) { clearInterval(iv); return; }
 
-        // Update each result
-        if (data.results) {
-          data.results.forEach(r => {
-            const statusMap = {
-              'exposed': 'exposed',
-              'not_found': 'cleared',
-              'blocked': 'blocked',
-              'error': 'error',
-            };
-            updateCard(r.site, statusMap[r.scanStatus] || 'pending', r.scan_notes || r.scanNotes, r.found);
-          });
-        }
-
-        // Update progress
-        const done = data.results ? data.results.length : 0;
-        const pct = Math.round((done / 10) * 100);
-        document.getElementById('progressFill').style.width = pct + '%';
-        document.getElementById('progressText').textContent = `Scanned ${done} of 10 sites...`;
-
-        // Check if complete
-        if (data.scan && data.scan.status === 'completed') {
-          clearInterval(iv);
-          document.getElementById('progressText').textContent = '✅ Scan complete!';
-          document.getElementById('progressFill').style.width = '100%';
-          document.getElementById('scanBtn').disabled = false;
-          document.getElementById('scanBtn').textContent = '🔍 Scan Now';
-
-          // Show summary
-          if (data.scan.summary) {
-            const s = JSON.parse(data.scan.summary);
-            showSummary(s);
+          // Update each site from the exposures array
+          let doneCount = 0;
+          if (data.exposures) {
+            data.exposures.forEach(r => {
+              const statusMap = {
+                'exposed': 'exposed',
+                'not_found': 'cleared',
+                'blocked': 'blocked',
+                'scanning': 'scanning',
+                'error': 'error',
+              };
+              updateCard(r.site, statusMap[r.status] || 'pending', r.notes, r.found);
+              if (r.status === 'exposed' || r.status === 'not_found' || r.status === 'blocked' || r.status === 'error') {
+                doneCount++;
+              }
+            });
           }
 
-          loadHistory();
-        }
+          const total = data.scan.sites || 10;
+          const pct = Math.round((doneCount / total) * 100);
+          document.getElementById('progressFill').style.width = pct + '%';
+          document.getElementById('progressText').textContent = `Scanned ${doneCount} of ${total} sites...`;
 
-        if (attempts >= maxAttempts) {
-          clearInterval(iv);
-          document.getElementById('scanBtn').disabled = false;
-          document.getElementById('scanBtn').textContent = '🔍 Scan Now';
+          // Complete
+          if (data.scan && data.scan.status === 'completed') {
+            clearInterval(iv);
+            document.getElementById('progressText').textContent = 'Scan complete!';
+            document.getElementById('progressFill').style.width = '100%';
+            document.getElementById('scanBtn').disabled = false;
+            document.getElementById('scanBtn').textContent = 'Scan Now';
+
+            if (data.scan.summary) {
+              const s = typeof data.scan.summary === 'string'
+                ? JSON.parse(data.scan.summary)
+                : data.scan.summary;
+              showSummary(s);
+            }
+            loadHistory();
+          }
+
+          // Failed
+          if (data.scan && data.scan.status === 'failed') {
+            clearInterval(iv);
+            document.getElementById('progressText').textContent = 'Scan failed';
+            document.getElementById('scanBtn').disabled = false;
+            document.getElementById('scanBtn').textContent = 'Scan Now';
+          }
+        } catch (err) {
+          // Swallow polling errors — keep retrying
         }
-      }, 1000);
+      }, 2000);
     }
 
     function showSummary(s) {
