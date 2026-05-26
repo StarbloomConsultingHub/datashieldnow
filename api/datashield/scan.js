@@ -42,10 +42,10 @@ export default async function handler(req, res) {
       `;
     }
 
-    // 3. Enqueue to QStash using raw HTTPS request (avoid Vercel global fetch issues)
+    // 3. Enqueue to QStash
     const qstashToken = process.env.QSTASH_TOKEN;
     const workerUrl = 'https://datashieldnow.com/api/datashield/worker';
-    let qstashResult = 'not_attempted';
+    let qstashResult = 'no_qstash_token';
     if (qstashToken) {
       try {
         const qres = await fetch('https://qstash-us-east-1.upstash.io/v2/publish/' + encodeURIComponent(workerUrl), {
@@ -59,18 +59,16 @@ export default async function handler(req, res) {
         });
         qstashResult = qres.ok ? 'ok' : 'http_' + qres.status;
       } catch (qerr) {
-        qstashResult = 'error_' + qerr.message.substring(0, 50);
+        qstashResult = 'error_' + qerr.message;
       }
-    } else {
-      qstashResult = 'no_token';
     }
-    console.log('[Scan] QStash result:', qstashResult);
 
-    // 4. Return 200 immediately
+    // 4. Return 200 immediately with diagnostics
     return res.status(200).json({
       ok: true,
       scan_id: scanId,
       sites: brokers.length,
+      qstash_result: qstashResult,
     });
 
   } catch (err) {
