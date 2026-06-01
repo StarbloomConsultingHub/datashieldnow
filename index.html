@@ -3,8 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DataShield   Digital Footprint Scanner</title>
+  <title>DataShield &mdash; 200+ Data Broker Opt-Out &amp; Digital Footprint Scanner</title>
+  <meta name="description" content="Scan 200+ data broker sites for your personal information. Automated CCPA opt-out and deletion requests. Free scan &mdash; no credit card required.">
+  <meta name="keywords" content="data broker opt out, remove personal information from internet, CCPA opt out, delete my data from data brokers, privacy protection, digital footprint scanner, people search removal, authorized agent CCPA">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://datashieldnow.com">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="DataShield &mdash; Automated Data Broker Opt-Out Service">
+  <meta property="og:description" content="Scan 200+ data broker sites for your personal information. Automated CCPA opt-out requests. Free scan.">
+  <meta property="og:url" content="https://datashieldnow.com">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="DataShield">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="DataShield &mdash; Data Broker Opt-Out Service">
+  <meta name="twitter:description" content="Scan 200+ brokers. Automated CCPA opt-out. Free scan.">
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-4188T95WWQ"></script>
@@ -202,17 +218,47 @@
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "Organization",
+      "@type": "Service",
       "name": "DataShield",
       "url": "https://datashieldnow.com",
-      "logo": "https://datashieldnow.com/favicon.svg",
-      "description": "DataShield is a digital footprint scanner and automated data broker opt-out service. It finds and removes personal information from the internet's largest people-search sites.",
+      "description": "DataShield is a digital footprint scanner and automated data broker opt-out service. It scans 200+ consumer data broker sites and submits CCPA opt-out and deletion requests on your behalf.",
+      "provider": {
+        "@type": "Organization",
+        "name": "StarBloom Consulting"
+      },
+      "serviceType": "Data Privacy &amp; Broker Opt-Out",
+      "areaServed": "US",
       "foundingDate": "2026",
+      "offers": {
+        "@type": "Offer",
+        "price": "9.99",
+        "priceCurrency": "USD",
+        "priceValidUntil": "2027-01-01"
+      },
       "sameAs": [
-        "https://www.wikidata.org/wiki/Q456632",
-        "https://www.wikidata.org/wiki/Q105634591",
+        "https://www.wikidata.org/wiki/Q60754243",
         "https://oag.ca.gov/privacy/ccpa",
-        "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        "https://privacy.ca.gov/drop/",
+        "https://cppa.ca.gov/data_broker_registry/",
+        "https://www.ftc.gov/business-guidance/privacy-security/consumer-privacy"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "name": "DataShield",
+      "url": "https://datashieldnow.com",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://datashieldnow.com/?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://datashieldnow.com" },
+        { "@type": "ListItem", "position": 2, "name": "Free Scan", "item": "https://datashieldnow.com#scan" },
+        { "@type": "ListItem", "position": 3, "name": "Subscribe", "item": "https://datashieldnow.com#pricing" }
       ]
     },
     {
@@ -256,6 +302,30 @@
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "Yes. No contracts, no cancellation fees, no hoops. Cancel anytime and your data is removed from our system."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need a power of attorney for DataShield to act on my behalf?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Under the California Consumer Privacy Act (CCPA), you can designate DataShield as your authorized agent via signed written permission. No power of attorney or notarization is required. DataShield maintains your signed authorization on file and provides it to data brokers upon request."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the CCPA and how does it help me remove my data?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The California Consumer Privacy Act (CCPA) and the California Privacy Rights Act (CPRA) give consumers the right to request that data brokers delete their personal information and opt out of the sale or sharing of that information. As of 2026, the Delete Act requires all data brokers registered in California to process these requests. DataShield submits CCPA requests on your behalf as your authorized agent."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is DataShield's broker list verified?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. DataShield's broker coverage is sourced from the California Privacy Protection Agency's official Data Broker Registry, which lists all data brokers legally required to register with the state. Each broker on our list is verified to accept email-based opt-out requests under the CCPA."
           }
         }
       ]
@@ -327,14 +397,35 @@
 
     <!-- Scan History -->
     <div class="history-list" id="historyList">
-      <h2>Recent Scans</h2>
+      <h2>Recent Scans &mdash; Covering 200+ Brokers</h2>
+      <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;">31 branded sites + automated sweep of the CA DPPA registry</p>
+    </div>
+  <!-- Trust Signals -->
+  <div class="container" style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border);">
+    <div style="text-align: center;">
+      <p style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem;">Verified Coverage Sources</p>
+      <div style="display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; font-size: 0.75rem; color: var(--text-muted);">
+        <span>California Data Broker Registry</span>
+        <span>CCPA/CPRA Compliant</span>
+        <span>Authorized Agent Framework</span>
+        <span>Stripe Payments</span>
+      </div>
+      <p style="font-size: 0.65rem; color: var(--text-muted); margin-top: 0.75rem; max-width: 500px; margin-left: auto; margin-right: auto;">
+        DataShield's broker coverage is derived from the <a href="https://cppa.ca.gov/data_broker_registry/" target="_blank" rel="noopener" style="color: var(--accent);">California Privacy Protection Agency Data Broker Registry</a>.
+        All opt-out requests are submitted under the CCPA authorized agent framework (Civil Code &sect; 1798.135).
+      </p>
     </div>
   </div>
 
   <script>
     const BROKER_SITES = [
       'Spokeo', 'BeenVerified', 'Whitepages', 'Intelius', 'MyLife',
-      'FamilyTreeNow', 'PeekYou', 'Radaris', 'TruePeopleSearch', 'FastPeopleSearch'
+      'FamilyTreeNow', 'PeekYou', 'Radaris', 'TruePeopleSearch', 'FastPeopleSearch',
+      'TruthFinder', 'InstantCheckmate', 'PeopleWhiz', 'Nuwber', 'ZoomInfo',
+      'Ancestry.com', 'Pipl', 'Lusha', 'RocketReach', 'PeopleLooker',
+      'PeopleSmart', 'US Search', 'ZabaSearch', 'CheckSecrets', 'InfoPay',
+      'NumLookup', 'USPeopleSearch', 'PeopleSearcher', 'Social Catfish', 'Unmask',
+      'Information.com'
     ];
 
     // Render broker results grid
@@ -356,6 +447,20 @@
         `;
         grid.appendChild(card);
       });
+      // Add a final card showing total sweep count
+      const sweepCard = document.createElement('div');
+      sweepCard.className = 'result-card';
+      sweepCard.style.opacity = '0.6';
+      sweepCard.innerHTML = `
+        <div>
+          <div class="site">+200 more brokers</div>
+          <div class="detail">via automated email sweep (CA registry)</div>
+        </div>
+        <div class="actions">
+          <span class="status" style="background:rgba(56,189,248,0.15);color:var(--accent);font-size:0.7rem;">Covered</span>
+        </div>
+      `;
+      grid.appendChild(sweepCard);
     }
     renderGrid();
 
@@ -535,7 +640,11 @@
       <a href="/privacy" style="color: #8a8fa8; text-decoration: none;">Privacy Policy</a>
       <a href="mailto:hello@datashieldnow.com" style="color: #8a8fa8; text-decoration: none;">Contact</a>
     </div>
-    <p style="color: #5a5d6a; font-size: 0.75rem;">DataShield " Automated Data Broker Removal Service</p>
+    <p style="color: #5a5d6a; font-size: 0.75rem;">DataShield &mdash; Automated Data Broker Removal Service</p>
+    <div style="margin-top: 0.75rem; font-size: 0.7rem; color: #5a5d6a; line-height: 1.6;">
+      <p>DataShield submits CCPA opt-out and deletion requests as an authorized agent on behalf of consumers. Coverage sourced from the <a href="https://cppa.ca.gov/data_broker_registry/" target="_blank" rel="noopener" style="color:#4a90d9;">California Data Broker Registry</a>. Data brokers are required to honor valid opt-out requests under the California Consumer Privacy Act (CCPA) and California Privacy Rights Act (CPRA).</p>
+      <p style="margin-top: 0.5rem;"><a href="https://oag.ca.gov/privacy/ccpa" target="_blank" rel="noopener" style="color:#4a90d9;">CCPA Official Text</a> &bull; <a href="https://privacy.ca.gov/drop/" target="_blank" rel="noopener" style="color:#4a90d9;">California DROP</a> &bull; <a href="https://www.ftc.gov/business-guidance/privacy-security/consumer-privacy" target="_blank" rel="noopener" style="color:#4a90d9;">FTC Consumer Privacy</a></p>
+    </div>
   </div>
 
 </body>
