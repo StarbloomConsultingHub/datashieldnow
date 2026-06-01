@@ -3,32 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Terms of Service   DataShield</title>
+  <title>Terms of Service &mdash; DataShield</title>
   <meta name="description" content="DataShield terms of service. No contracts, cancel anytime, 70% removal guarantee in 30 days.">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x1F6E1;</text></svg>">
   <link rel="canonical" href="https://datashieldnow.com/terms">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: #080a10;
-      color: #e2e4ed;
-      line-height: 1.7;
-    }
-    .container { max-width: 700px; margin: 0 auto; padding: 3rem 1.25rem; }
-    h1 { font-size: 2rem; font-weight: 800; margin-bottom: 0.25rem; }
-    .date { color: #5a5d6a; font-size: 0.8rem; margin-bottom: 2rem; }
-    h2 { font-size: 1.15rem; margin-top: 1.75rem; margin-bottom: 0.5rem; color: #7dd3fc; }
-    p { color: #b0b3c4; margin-bottom: 0.75rem; font-size: 0.9rem; }
-    ul { color: #b0b3c4; padding-left: 1.25rem; margin-bottom: 0.75rem; font-size: 0.9rem; }
-    ul li { margin-bottom: 0.3rem; }
-    strong { color: #e2e4ed; }
-    a { color: #38bdf8; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    .back { display: inline-block; margin-top: 2rem; color: #5a5d6a; font-size: 0.85rem; }
+    :root{--bg:#07080c;--surface:#11131f;--border:#1e2238;--text:#e2e4ed;--text-muted:#7d80a0;--accent:#38bdf8}
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;-webkit-font-smoothing:antialiased}
+    .container{max-width:700px;margin:0 auto;padding:3rem 1.5rem}
+    h1{font-size:2rem;font-weight:800;margin-bottom:0.25rem}
+    .date{color:var(--text-muted);font-size:0.8rem;margin-bottom:2rem}
+    h2{font-size:1.15rem;font-weight:700;margin-top:1.75rem;margin-bottom:0.5rem;color:var(--accent)}
+    p{color:var(--text-muted);margin-bottom:0.75rem;font-size:0.9rem}
+    ul{color:var(--text-muted);padding-left:1.25rem;margin-bottom:0.75rem;font-size:0.9rem}
+    ul li{margin-bottom:0.3rem}
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .back{display:inline-flex;align-items:center;gap:0.4rem;margin-top:2rem;color:var(--text-muted);font-size:0.85rem;transition:color .2s}
+    .back:hover{color:var(--text)}
+    nav{padding:1.25rem 0;border-bottom:1px solid var(--border)}
+    nav .container{max-width:960px;margin:0 auto;padding:0 1.5rem;display:flex;align-items:center;gap:0.5rem}
+    .nav-brand{display:flex;align-items:center;gap:0.5rem;font-weight:700;font-size:1.1rem;color:var(--text);text-decoration:none}
   </style>
 </head>
 <body>
+  <nav>
+    <div class="container">
+      <a href="https://datashieldnow.com" class="nav-brand">&#x1F6E1; DataShield</a>
+    </div>
+  </nav>
   <div class="container">
     <h1>Terms of Service</h1>
     <p class="date">Last updated: May 25, 2026</p>
@@ -37,7 +41,7 @@
     <p>DataShield provides automated data broker scanning and opt-out request submission. We scan publicly available data broker sites for your personal information and submit removal requests on your behalf.</p>
 
     <h2>What We Guarantee</h2>
-    <p>We guarantee a 70% removal rate on tracked data broker sites within 30 days of subscription. If we do not meet this threshold, you are entitled to a full refund of your most recent month's payment.</p>
+    <p>We guarantee a 70% removal rate on tracked data broker sites within 30 days of subscription. If we do not meet this threshold, you are entitled to a full refund of your most recent months payment.</p>
 
     <h2>What We Do Not Guarantee</h2>
     <ul>
@@ -57,7 +61,7 @@
     <h2>Changes</h2>
     <p>We may update these terms. Continued use after changes constitutes acceptance.</p>
 
-    <a href="https://datashieldnow.com" class="back">← Back to DataShield</a>
+    <a href="https://datashieldnow.com" class="back">&larr; Back to DataShield</a>
   </div>
 </body>
 </html>

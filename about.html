@@ -3,93 +3,72 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About DataShield — Who We Are</title>
+  <title>About DataShield &mdash; Who We Are</title>
   <meta name="description" content="DataShield was built by operators who needed automated data broker removal for their own families. We found the tools too expensive and started our own.">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x1F6E1;</text></svg>">
   <link rel="canonical" href="https://datashieldnow.com/about">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: #080a10;
-      color: #e2e4ed;
-      line-height: 1.6;
-    }
-    .container { max-width: 700px; margin: 0 auto; padding: 3rem 1.25rem; }
-    h1 { font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem; }
-    .sub { color: #8a8fa8; font-size: 0.95rem; margin-bottom: 2rem; }
-    h2 { font-size: 1.2rem; margin-top: 2rem; margin-bottom: 0.75rem; color: #7dd3fc; }
-    p { color: #b0b3c4; margin-bottom: 1rem; font-size: 0.92rem; }
-    ul { color: #b0b3c4; margin-bottom: 1.5rem; padding-left: 1.25rem; font-size: 0.92rem; }
-    ul li { margin-bottom: 0.4rem; }
-    .tagline { background: #12141e; border: 1px solid #252836; border-radius: 12px; padding: 1.5rem; margin: 2rem 0; }
-    .tagline p { font-style: italic; color: #8a8fa8; font-size: 0.9rem; margin: 0; }
-    a { color: #38bdf8; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    .back { display: inline-block; margin-top: 2rem; color: #5a5d6a; font-size: 0.85rem; }
+    :root{--bg:#07080c;--surface:#11131f;--border:#1e2238;--text:#e2e4ed;--text-muted:#7d80a0;--accent:#38bdf8;--accent-hover:#7dd3fc}
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;-webkit-font-smoothing:antialiased}
+    .container{max-width:700px;margin:0 auto;padding:3rem 1.5rem}
+    h1{font-size:2.2rem;font-weight:800;margin-bottom:0.5rem;letter-spacing:-0.02em}
+    .sub{color:var(--text-muted);font-size:0.95rem;margin-bottom:2rem}
+    h2{font-size:1.25rem;font-weight:700;margin-top:2.5rem;margin-bottom:0.75rem;color:var(--accent)}
+    p{color:var(--text-muted);margin-bottom:1rem;font-size:0.92rem}
+    ul{color:var(--text-muted);margin-bottom:1.5rem;padding-left:1.25rem;font-size:0.92rem}
+    ul li{margin-bottom:0.4rem}
+    .tagline{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin:2rem 0}
+    .tagline p{font-style:italic;color:var(--text-muted);font-size:0.9rem;margin:0}
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .back{display:inline-flex;align-items:center;gap:0.4rem;margin-top:2rem;color:var(--text-muted);font-size:0.85rem;transition:color .2s}
+    .back:hover{color:var(--text)}
+    nav{padding:1.25rem 0;border-bottom:1px solid var(--border)}
+    nav .container{max-width:960px;margin:0 auto;padding:0 1.5rem;display:flex;align-items:center;gap:0.5rem}
+    .nav-brand{display:flex;align-items:center;gap:0.5rem;font-weight:700;font-size:1.1rem;color:var(--text);text-decoration:none}
   </style>
 </head>
 <body>
+  <nav>
+    <div class="container">
+      <a href="https://datashieldnow.com" class="nav-brand">&#x1F6E1; DataShield</a>
+    </div>
+  </nav>
   <div class="container">
     <h1>About DataShield</h1>
     <p class="sub">Automated data broker removal. Built by people who needed it.</p>
 
     <h2>Why We Built This</h2>
     <p>
-      DataShield started the same way most useful tools do: we needed it ourselves. After 
-      spending hours digging through data broker sites like <strong>Spokeo</strong> and 
-      <strong>BeenVerified</strong> and finding our own home addresses, phone numbers, and 
+      DataShield started the same way most useful tools do: we needed it ourselves. After
+      spending hours digging through data broker sites like <strong>Spokeo</strong> and
+      <strong>BeenVerified</strong> and finding our own home addresses, phone numbers, and
       family members listed publicly, we looked for a service to handle it automatically.
     </p>
     <p>
-      The existing options were either too expensive ($130-170/year), too limited in what they 
-      actually removed, or required a credit card just to see what was exposed. We figured there 
+      The existing options were either too expensive ($130-170/year), too limited in what they
+      actually removed, or required a credit card just to see what was exposed. We figured there
       had to be a better way.
     </p>
-    <p>
-      So we built one.
-    </p>
+    <p>So we built one.</p>
 
     <div class="tagline">
-      <p>"DataShield was built by a team with backgrounds in operations and systems management. 
-      We know what it means to run something that actually works and we refuse to charge 
+      <p>"DataShield was built by a team with backgrounds in operations and systems management.
+      We know what it means to run something that actually works and we refuse to charge
       people $170/year for a product that only covers 60 sites."</p>
     </div>
 
     <h2>What We Do Differently</h2>
     <ul>
       <li><strong>Free scan, no card required.</strong> Find out where your data is before you pay a cent.</li>
-      <li><strong>We focus on the 10 highest-risk sites.</strong> Spokeo, BeenVerified, Whitepages, and the rest — the ones that actually sell your data to anyone.</li>
+      <li><strong>We focus on the 10 highest-risk sites.</strong> Spokeo, BeenVerified, Whitepages, and the rest &mdash; the ones that actually sell your data to anyone.</li>
       <li><strong>Transparent pricing.</strong> $9.99/mo for automated removal. $24.99/mo if you need phone-verify handling. No hidden fees.</li>
       <li><strong>70% removal guarantee in 30 days.</strong> We would rather under-promise and over-deliver.</li>
       <li><strong>We will never sell your data.</strong> Your information is used for your scan and deleted after processing. Period.</li>
     </ul>
 
-    <h2>Your Rights. Our Backbone.</h2>
-    <p>
-      DataShield operates within the privacy frameworks established by the 
-      <a href="https://oag.ca.gov/privacy/ccpa" target="_blank" rel="noopener">California Consumer Privacy Act (CCPA)</a> 
-      and the 
-      <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679" target="_blank" rel="noopener">General Data Protection Regulation (GDPR)</a>. 
-      These regulations codify what we believe: that 
-      <a href="https://www.wikidata.org/wiki/Q456632" target="_blank" rel="noopener">data privacy</a> 
-      is a fundamental right and that every person deserves the ability to 
-      <a href="https://www.wikidata.org/wiki/Q105634591" target="_blank" rel="noopener">opt out</a> 
-      of having their personal information bought and sold without consent.
-    </p>
-
-    <h2>Our Commitment</h2>
-    <p>
-      The data broker industry makes billions selling your personal information without your 
-      consent. State regulations like California's new DROP platform (launched January 2026) are 
-      starting to change that, but most people still need help getting their data off these sites 
-      right now.
-    </p>
-    <p>
-      DataShield exists to make that process simple, automated, and affordable.
-    </p>
-
-    <a href="https://datashieldnow.com" class="back">← Back to DataShield</a>
+    <a href="https://datashieldnow.com" class="back">&larr; Back to DataShield</a>
   </div>
 </body>
 </html>

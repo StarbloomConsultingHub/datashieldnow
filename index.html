@@ -3,540 +3,461 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DataShield   Digital Footprint Scanner</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
+  <title>DataShield &mdash; Data Broker Removal. Automated.</title>
+  <meta name="description" content="Scan 10 major data broker sites for free. See where your personal info is exposed, then let DataShield remove it automatically. No credit card required.">
+  <meta property="og:title" content="DataShield &mdash; Data Broker Removal. Automated.">
+  <meta property="og:description" content="Find and remove your personal data from Spokeo, BeenVerified, Whitepages and more. Free scan, automated removal.">
+  <meta property="og:url" content="https://datashieldnow.com">
+  <meta property="og:type" content="website">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://datashieldnow.com">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x1F6E1;</text></svg>">
 
-  <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-4188T95WWQ"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-4188T95WWQ');
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-4188T95WWQ');</script>
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","wwncztiaoj");
   </script>
 
-  <!-- Clarity -->
-  <script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "wwncztiaoj");
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {"@type":"Organization","@id":"https://datashieldnow.com/#organization","name":"DataShield","url":"https://datashieldnow.com","description":"Automated data broker removal service. Free scan, auto removal from Spokeo, BeenVerified, and more.","foundingDate":"2026"},
+      {"@type":"WebSite","@id":"https://datashieldnow.com/#website","url":"https://datashieldnow.com","name":"DataShield","description":"Automated data broker removal service","inLanguage":"en-US"},
+      {"@type":"WebPage","@id":"https://datashieldnow.com/#webpage","url":"https://datashieldnow.com","name":"DataShield &mdash; Free Data Broker Scan","description":"Scan 10 major data broker sites for free. See where your personal info is exposed, then let DataShield remove it automatically.","isPartOf":{"@id":"https://datashieldnow.com/#website"}},
+      {"@type":"Product","@id":"https://datashieldnow.com/#product","name":"DataShield Data Broker Removal","description":"Automated scanning and opt-out from 10+ data broker sites including Spokeo, BeenVerified, Whitepages, Intelius, and more.","offers":[{"@type":"Offer","name":"Self-Serve","price":"9.99","priceCurrency":"USD","priceType":"Monthly","description":"Weekly scans + automated opt-out requests"},{"@type":"Offer","name":"Concierge","price":"24.99","priceCurrency":"USD","priceType":"Monthly","description":"Everything in Self-Serve + phone-verified site handling"}]}
+    ]}
   </script>
 
   <style>
-    :root {
-      --bg: #0f1117;
-      --surface: #1a1d28;
-      --border: #2a2d3a;
-      --text: #e4e6ef;
-      --text-muted: #8a8fa8;
-      --accent: #38bdf8;
-      --accent-dim: #0284c7;
-      --green: #22c55e;
-      --red: #ef4444;
-      --amber: #f59e0b;
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-    }
-    .container { max-width: 900px; margin: 0 auto; padding: 2rem 1rem; }
+    :root{--bg:#07080c;--bg-alt:#0c0e16;--surface:#11131f;--surface-alt:#191d2e;--border:#1e2238;--text:#e2e4ed;--text-muted:#7d80a0;--text-dim:#505470;--accent:#38bdf8;--accent-hover:#7dd3fc;--accent-dim:#0369a1;--green:#22c55e;--red:#f87171;--amber:#fbbf24;--shield:#60a5fa}
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6;-webkit-font-smoothing:antialiased}
+    .container{max-width:960px;margin:0 auto;padding:0 1.5rem}
+    .container-narrow{max-width:720px;margin:0 auto;padding:0 1.5rem}
 
-    /* Header */
-    .header {
-      display: flex; align-items: center; gap: 0.75rem;
-      margin-bottom: 2rem;
-    }
-    .header h1 { font-size: 1.5rem; font-weight: 700; }
-    .header .tag {
-      background: var(--accent-dim);
-      color: #fff;
-      font-size: 0.7rem;
-      padding: 0.15rem 0.5rem;
-      border-radius: 999px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-    .subtitle { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 2rem; line-height: 1.5; }
+    /* NAV */
+    nav{padding:1.25rem 0;border-bottom:1px solid var(--border);background:var(--bg);position:sticky;top:0;z-index:100}
+    nav .container{display:flex;align-items:center;justify-content:space-between}
+    .nav-brand{display:flex;align-items:center;gap:0.5rem;font-weight:700;font-size:1.2rem}
+    .nav-brand .shield-icon{width:28px;height:28px;background:var(--accent-dim);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:1rem}
+    .nav-links{display:flex;gap:1.5rem;align-items:center}
+    .nav-links a{color:var(--text-muted);text-decoration:none;font-size:0.85rem;transition:color .2s}
+    .nav-links a:hover{color:var(--text)}
+    .nav-cta{background:var(--accent);color:#000!important;padding:0.4rem 1rem;border-radius:6px;font-weight:600;font-size:0.8rem!important}
+    .nav-cta:hover{background:var(--accent-hover)}
 
-    /* Scan Form */
-    .scan-form {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.5rem;
-      margin-bottom: 2rem;
-    }
-    .scan-form h2 { font-size: 1.1rem; margin-bottom: 0.5rem; }
-    .scan-form p { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem; }
-    .form-row { display: flex; gap: 0.75rem; flex-wrap: wrap; }
-    .form-row input {
-      flex: 1; min-width: 200px;
-      background: var(--bg); border: 1px solid var(--border);
-      color: var(--text); padding: 0.7rem 1rem;
-      border-radius: 8px; font-size: 0.9rem;
-    }
-    .form-row input:focus { outline: none; border-color: var(--accent); }
-    .form-row button {
-      background: var(--accent); color: #000;
-      border: none; padding: 0.7rem 1.5rem;
-      border-radius: 8px; font-weight: 600;
-      cursor: pointer; font-size: 0.9rem;
-      white-space: nowrap;
-    }
-    .form-row button:disabled { opacity: 0.5; cursor: not-allowed; }
-    .form-row button:hover:not(:disabled) { background: #7dd3fc; }
+    /* HERO */
+    .hero{padding:4rem 0 3rem;text-align:center;position:relative;overflow:hidden}
+    .hero::before{content:'';position:absolute;top:-50%;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(56,189,248,0.04) 0%,transparent 70%);pointer-events:none}
+    .hero-badge{display:inline-flex;align-items:center;gap:0.4rem;background:rgba(56,189,248,0.08);border:1px solid rgba(56,189,248,0.15);padding:0.3rem 0.8rem;border-radius:999px;font-size:0.75rem;color:var(--accent);margin-bottom:1.5rem}
+    .hero h1{font-size:2.8rem;font-weight:800;line-height:1.15;margin-bottom:1rem;letter-spacing:-0.02em}
+    .hero h1 .highlight{background:linear-gradient(135deg,var(--accent),var(--shield));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .hero p{color:var(--text-muted);font-size:1.1rem;max-width:560px;margin:0 auto 2rem}
 
-    /* Results Grid */
-    .results-grid { display: grid; gap: 0.5rem; }
-    .result-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 0.75rem 1rem;
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .result-card .site { font-weight: 600; font-size: 0.9rem; }
-    .result-card .status {
-      font-size: 0.8rem; padding: 0.2rem 0.5rem;
-      border-radius: 4px; font-weight: 500;
-    }
-    .status.exposed { background: rgba(239,68,68,0.15); color: var(--red); }
-    .status.cleared { background: rgba(34,197,94,0.15); color: var(--green); }
-    .status.blocked { background: rgba(245,158,11,0.15); color: var(--amber); }
-    .status.scanning { background: rgba(56,189,248,0.15); color: var(--accent); }
-    .status.pending { background: rgba(138,143,168,0.15); color: var(--text-muted); }
-    .status.error { background: rgba(239,68,68,0.15); color: var(--red); }
+    /* SCAN FORM */
+    .scan-section{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:2rem;margin-bottom:1.5rem}
+    .scan-form h2{font-size:1.2rem;font-weight:700;margin-bottom:0.3rem}
+    .scan-form .scan-sub{color:var(--text-muted);font-size:0.88rem;margin-bottom:1.25rem}
+    .form-row{display:flex;gap:0.75rem;flex-wrap:wrap}
+    .form-row input{flex:1;min-width:200px;background:var(--bg);border:1px solid var(--border);color:var(--text);padding:0.8rem 1rem;border-radius:8px;font-size:0.9rem;transition:border-color .2s}
+    .form-row input:focus{outline:none;border-color:var(--accent)}
+    .form-row input::placeholder{color:var(--text-dim)}
+    .form-row button{background:var(--accent);color:#000;border:none;padding:0.8rem 1.8rem;border-radius:8px;font-weight:700;cursor:pointer;font-size:0.9rem;white-space:nowrap;transition:background .2s,transform .1s}
+    .form-row button:hover:not(:disabled){background:var(--accent-hover)}
+    .form-row button:active:not(:disabled){transform:scale(0.97)}
+    .form-row button:disabled{opacity:0.5;cursor:not-allowed}
+    .scan-trust{display:flex;align-items:center;gap:1rem;margin-top:0.75rem;font-size:0.78rem;color:var(--text-dim)}
+    .scan-trust span{display:flex;align-items:center;gap:0.3rem}
 
-    .result-card .detail { font-size: 0.78rem; color: var(--text-muted); }
-    .result-card .actions { display: flex; align-items: center; gap: 0.75rem; }
-    .result-card .actions a {
-      color: var(--accent); font-size: 0.8rem; text-decoration: none;
-    }
-    .result-card .actions a:hover { text-decoration: underline; }
+    /* PROGRESS */
+    .progress-wrap{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1rem 1.5rem;margin-bottom:1rem;display:none}
+    .progress-wrap.show{display:block}
+    .progress-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem}
+    .progress-header .label{font-size:0.85rem;font-weight:600}
+    .progress-header .pct{font-size:0.8rem;color:var(--text-muted)}
+    .progress-bar{height:6px;background:var(--border);border-radius:3px;overflow:hidden}
+    .progress-bar .fill{height:100%;background:linear-gradient(90deg,var(--accent-dim),var(--accent));width:0%;transition:width .3s ease;border-radius:3px}
 
-    /* Summary Banner */
-    .summary-banner {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1rem 1.5rem;
-      margin-bottom: 1.5rem;
-      display: none;
-    }
-    .summary-banner.show { display: block; }
-    .summary-banner .stats { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-top: 0.5rem; }
-    .summary-banner .stat { text-align: center; }
-    .summary-banner .stat .num { font-size: 1.5rem; font-weight: 700; }
-    .summary-banner .stat .label { font-size: 0.75rem; color: var(--text-muted); }
-    .summary-banner .stat .num.exposed { color: var(--red); }
-    .summary-banner .stat .num.cleared { color: var(--green); }
-    .summary-banner .stat .num.blocked { color: var(--amber); }
+    /* SUMMARY */
+    .summary-banner{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.25rem 1.5rem;margin-bottom:1.5rem;display:none}
+    .summary-banner.show{display:block}
+    .summary-banner .summary-title{font-weight:700;font-size:0.95rem;margin-bottom:0.75rem}
+    .summary-banner .stats{display:flex;gap:1.5rem;flex-wrap:wrap}
+    .summary-banner .stat{text-align:center}
+    .summary-banner .stat .num{font-size:1.6rem;font-weight:800}
+    .summary-banner .stat .label{font-size:0.72rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.04em}
+    .summary-banner .stat .num.exposed{color:var(--red)}
+    .summary-banner .stat .num.cleared{color:var(--green)}
+    .summary-banner .stat .num.blocked{color:var(--amber)}
 
-    /* Subscribe */
-    .subscribe-box {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.5rem;
-      margin-top: 2rem;
-      text-align: center;
-    }
-    .subscribe-box h3 { margin-bottom: 0.5rem; }
-    .subscribe-box p { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem; }
-    .subscribe-box .pricing {
-      display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
-      margin-bottom: 1rem;
-    }
-    .subscribe-box .tier {
-      background: var(--bg); border: 1px solid var(--border);
-      border-radius: 8px; padding: 1rem; flex: 1; min-width: 150px;
-    }
-    .subscribe-box .tier h4 { font-size: 1rem; }
-    .subscribe-box .tier .price { font-size: 1.4rem; font-weight: 700; margin: 0.5rem 0; }
-    .subscribe-box .tier .price span { font-size: 0.8rem; font-weight: 400; color: var(--text-muted); }
+    /* RESULTS */
+    h2.section-title{font-size:1.1rem;font-weight:700;margin-bottom:0.75rem;display:flex;align-items:center;gap:0.5rem}
+    .results-grid{display:grid;gap:0.4rem}
+    .result-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:0.7rem 1rem;display:flex;align-items:center;justify-content:space-between;transition:border-color .2s}
+    .result-card .site{font-weight:600;font-size:0.88rem}
+    .result-card .status{font-size:0.75rem;padding:0.2rem 0.6rem;border-radius:4px;font-weight:600;white-space:nowrap}
+    .status.exposed{background:rgba(248,113,113,0.12);color:var(--red)}
+    .status.cleared{background:rgba(34,197,94,0.12);color:var(--green)}
+    .status.blocked{background:rgba(251,191,36,0.12);color:var(--amber)}
+    .status.scanning{background:rgba(56,189,248,0.12);color:var(--accent)}
+    .status.pending{background:rgba(125,128,160,0.1);color:var(--text-dim)}
+    .status.error{background:rgba(248,113,113,0.12);color:var(--red)}
+    .result-card .detail{font-size:0.78rem;color:var(--text-muted)}
+    .result-card .actions{display:flex;align-items:center;gap:0.75rem}
+    .result-card .actions a{color:var(--accent);font-size:0.78rem;text-decoration:none}
+    .result-card .actions a:hover{text-decoration:underline}
 
-    /* Progress bar */
-    .progress-wrap {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1rem 1.5rem;
-      margin-bottom: 1rem;
-      display: none;
-    }
-    .progress-wrap.show { display: block; }
-    .progress-bar {
-      height: 6px; background: var(--border); border-radius: 3px;
-      overflow: hidden; margin-top: 0.5rem;
-    }
-    .progress-bar .fill {
-      height: 100%; background: var(--accent);
-      width: 0%; transition: width 0.3s;
-      border-radius: 3px;
-    }
-    .progress-text { font-size: 0.8rem; color: var(--text-muted); }
+    /* HOW IT WORKS */
+    .how-section{padding:4rem 0;border-top:1px solid var(--border)}
+    .how-section h2{text-align:center;font-size:1.6rem;font-weight:800;margin-bottom:2.5rem}
+    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+    .step{text-align:center;padding:1.5rem}
+    .step-num{width:44px;height:44px;background:var(--accent-dim);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.1rem;margin:0 auto 1rem}
+    .step h3{font-size:1rem;font-weight:700;margin-bottom:0.4rem}
+    .step p{color:var(--text-muted);font-size:0.85rem}
 
-    h2 { font-size: 1.1rem; margin-bottom: 1rem; }
+    /* PRICING */
+    .pricing-section{padding:4rem 0;border-top:1px solid var(--border)}
+    .pricing-section h2{text-align:center;font-size:1.6rem;font-weight:800;margin-bottom:0.5rem}
+    .pricing-section .pricing-sub{text-align:center;color:var(--text-muted);font-size:0.9rem;margin-bottom:2rem}
+    .pricing-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;max-width:600px;margin:0 auto}
+    .pricing-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:2rem 1.5rem;text-align:center;position:relative;transition:border-color .2s,transform .2s}
+    .pricing-card:hover{border-color:var(--accent-dim);transform:translateY(-2px)}
+    .pricing-card.featured{border-color:var(--accent-dim);background:var(--surface-alt)}
+    .pricing-card.featured::before{content:'Most Popular';position:absolute;top:-0.6rem;left:50%;transform:translateX(-50%);background:var(--accent);color:#000;font-size:0.7rem;font-weight:700;padding:0.2rem 1rem;border-radius:999px;text-transform:uppercase;letter-spacing:0.04em}
+    .pricing-card .tier-name{font-size:1rem;font-weight:700;margin-bottom:0.3rem}
+    .pricing-card .price{font-size:2rem;font-weight:800;margin-bottom:0.3rem}
+    .pricing-card .price span{font-size:0.85rem;font-weight:400;color:var(--text-muted)}
+    .pricing-card .tier-desc{color:var(--text-muted);font-size:0.85rem;margin-bottom:1.25rem}
+    .pricing-card .tier-features{list-style:none;text-align:left;margin-bottom:1.5rem}
+    .pricing-card .tier-features li{font-size:0.82rem;padding:0.3rem 0;color:var(--text);display:flex;align-items:center;gap:0.4rem}
+    .pricing-card .tier-features li::before{content:'\2713';color:var(--green);font-weight:700}
+    .pricing-cta{display:inline-block;background:var(--accent);color:#000;padding:0.6rem 1.5rem;border-radius:8px;font-weight:700;text-decoration:none;font-size:0.9rem;transition:background .2s}
+    .pricing-cta:hover{background:var(--accent-hover)}
 
-    /* Scan history */
-    .history-list { margin-top: 2rem; }
-    .history-item {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 0.6rem 1rem;
-      display: flex; justify-content: space-between; align-items: center;
-      margin-bottom: 0.3rem;
-    }
-    .history-item .email { font-weight: 500; font-size: 0.85rem; }
-    .history-item .date { font-size: 0.75rem; color: var(--text-muted); }
+    /* TRUST */
+    .trust-bar{padding:2.5rem 0;text-align:center;border-top:1px solid var(--border)}
+    .trust-bar p{font-size:0.75rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:1rem}
+    .trust-bar .logos{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;font-size:0.85rem;color:var(--text-muted)}
+    .trust-bar .logos span{display:flex;align-items:center;gap:0.4rem}
+
+    /* GUARANTEE */
+    .guarantee-section{padding:2rem 1.5rem;background:var(--surface);border:1px solid var(--border);border-radius:12px;text-align:center;margin:2rem 0}
+    .guarantee-section .badge{font-size:2rem;margin-bottom:0.5rem}
+    .guarantee-section h3{font-size:1rem;font-weight:700;margin-bottom:0.3rem}
+    .guarantee-section p{color:var(--text-muted);font-size:0.85rem;max-width:480px;margin:0 auto}
+
+    /* HISTORY */
+    .history-list{margin-top:2rem}
+    .history-item{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:0.6rem 1rem;display:flex;justify-content:space-between;align-items:center;margin-bottom:0.3rem}
+    .history-item .email{font-weight:500;font-size:0.82rem}
+    .history-item .date{font-size:0.72rem;color:var(--text-dim)}
+
+    /* FOOTER */
+    footer{border-top:1px solid var(--border);padding:2rem 0;margin-top:3rem}
+    footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+    footer .links{display:flex;gap:1.5rem}
+    footer .links a{color:var(--text-dim);text-decoration:none;font-size:0.82rem;transition:color .2s}
+    footer .links a:hover{color:var(--text-muted)}
+    footer .copyright{color:var(--text-dim);font-size:0.78rem}
+
+    /* RESPONSIVE */
+    @media(max-width:768px){.hero h1{font-size:2rem}.hero p{font-size:0.95rem}.steps{grid-template-columns:1fr;gap:1rem}.pricing-grid{grid-template-columns:1fr}footer .container{flex-direction:column;text-align:center}.nav-links{gap:1rem}.scan-section{padding:1.25rem}}
+    @media(max-width:480px){.hero h1{font-size:1.7rem}.form-row{flex-direction:column}.form-row input{min-width:unset}.form-row button{width:100%}}
   </style>
-  <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Organization",
-      "name": "DataShield",
-      "url": "https://datashieldnow.com",
-      "logo": "https://datashieldnow.com/favicon.svg",
-      "description": "DataShield is a digital footprint scanner and automated data broker opt-out service. It finds and removes personal information from the internet's largest people-search sites.",
-      "foundingDate": "2026",
-      "sameAs": [
-        "https://www.wikidata.org/wiki/Q456632",
-        "https://www.wikidata.org/wiki/Q105634591",
-        "https://oag.ca.gov/privacy/ccpa",
-        "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
-      ]
-    },
-    {
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "What is DataShield?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "DataShield is a digital footprint scanner and automated data broker opt-out service. It scans the top 10 consumer data broker sites and submits removal requests on your behalf."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How does DataShield work?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "You enter your name and email to trigger a real-time scan of 10 major data broker sites. The results show which sites have your data. You can then subscribe for weekly scans and automated opt-outs managed by our system."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What data brokers does DataShield scan?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "DataShield scans Spokeo, BeenVerified, Whitepages, Intelius, MyLife, FamilyTreeNow, PeekYou, Radaris, TruePeopleSearch, and FastPeopleSearch."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How is DataShield different from Incogni or DeleteMe?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "DataShield offers a free scan with no credit card required, transparent pricing at $9.99/mo, and a 70% removal guarantee in 30 days. Unlike larger services that charge $130-170/year, DataShield focuses on the top 10 highest-risk brokers where your data is most exposed."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Can I cancel my DataShield subscription anytime?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes. No contracts, no cancellation fees, no hoops. Cancel anytime and your data is removed from our system."
-          }
-        }
-      ]
-    }
-  ]
-}
-</script>
 </head>
 <body>
-  <div class="container">
-    <div class="header">
-      <h1>🛡️ DataShield</h1>
-      <span class="tag">beta</span>
-    </div>
-    <p class="subtitle">
-      Scan the top 10 data broker sites to see where your personal information is exposed.
-      Results show in real-time as each site is checked.
-    </p>
 
-    <!-- Scan Form -->
+<nav>
+  <div class="container">
+    <div class="nav-brand">
+      <div class="shield-icon">&#x1F6E1;</div>
+      DataShield
+    </div>
+    <div class="nav-links">
+      <a href="#how-it-works">How It Works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="/about">About</a>
+      <a href="#scan" class="nav-cta">Free Scan</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero" id="scan">
+  <div class="container">
+    <div class="hero-badge">&#x1F512; Free scan &mdash; no credit card required</div>
+    <h1>See Where Your Data Is<br><span class="highlight">Then Remove It.</span></h1>
+    <p>Scan Spokeo, BeenVerified, Whitepages, and 7 other data broker sites. Find out who is selling your address and phone number right now.</p>
+  </div>
+</section>
+
+<!-- SCAN -->
+<section class="container">
+  <div class="scan-section">
     <div class="scan-form">
       <h2>Check Your Digital Footprint</h2>
-      <p>Enter your name and email to scan data broker sites for your information.</p>
+      <p class="scan-sub">Enter your name and email to scan major data broker sites for your information.</p>
       <div class="form-row">
-        <input type="text" id="scanName" placeholder="Full name" />
-        <input type="email" id="scanEmail" placeholder="Email address" />
-        <button id="scanBtn" onclick="startScan()">🔍 Scan Now</button>
+        <input type="text" id="scanName" placeholder="Full name" autocomplete="name">
+        <input type="email" id="scanEmail" placeholder="Email address" autocomplete="email">
+        <button id="scanBtn" onclick="startScan()">&#x1F50D; Scan Now</button>
       </div>
-    </div>
-
-    <!-- Progress -->
-    <div class="progress-wrap" id="progressWrap">
-      <div class="progress-text" id="progressText">Starting scan...</div>
-      <div class="progress-bar"><div class="fill" id="progressFill"></div></div>
-    </div>
-
-    <!-- Summary -->
-    <div class="summary-banner" id="summaryBanner">
-      <div class="stats" id="stats"></div>
-    </div>
-
-    <!-- Results -->
-    <h2>Results</h2>
-    <div class="results-grid" id="resultsGrid"></div>
-
-    <!-- Subscribe -->
-    <div class="subscribe-box">
-      <h3>🔒 Keep Your Data Clean Automatically</h3>
-      <p>Get weekly scans and automated opt-out submissions. We monitor 10+ data broker sites and submit removal requests for you.</p>
-      <div class="pricing">
-        <div class="tier">
-          <h4>Self-Serve</h4>
-          <div class="price">$9.99 <span>/mo</span></div>
-          <p style="font-size: 0.8rem; color: var(--text-muted);">Weekly scans + automated opt-outs</p>
-          <a href="https://checkout.stripe.com/c/pay/cs_live_a1Ap6ydi6ZCKlopBnbyTpcAuPvM04taPjpVar2K84dOzrUg3wvwhJAH7Bi" target="_blank" style="display:inline-block;background:var(--accent);color:#000;padding:0.5rem 1rem;border-radius:6px;text-decoration:none;font-weight:600;font-size:0.85rem;margin-top:0.5rem;">Subscribe</a>
-        </div>
-        <div class="tier">
-          <h4>Concierge</h4>
-          <div class="price">$24.99 <span>/mo</span></div>
-          <p style="font-size: 0.8rem; color: var(--text-muted);">Everything + we handle phone-verify sites</p>
-          <a href="https://checkout.stripe.com/c/pay/cs_live_a1dSe4GSgTjmZYh5mqFHtflx1DPndFZC8Jm8pORmTHkRpNqDMsdkSkpxl8" target="_blank" style="display:inline-block;background:var(--accent);color:#000;padding:0.5rem 1rem;border-radius:6px;text-decoration:none;font-weight:600;font-size:0.85rem;margin-top:0.5rem;">Subscribe</a>
-        </div>
+      <div class="scan-trust">
+        <span>&#x1F512; Your data stays private</span>
+        <span>&#x267B; Deleted after scan</span>
       </div>
-      <div class="form-row" style="justify-content: center;">
-        <input type="email" id="subEmail" placeholder="Your email" style="max-width: 300px;" />
-        <button onclick="subscribe()">Subscribe</button>
-      </div>
-    </div>
-
-    <!-- Scan History -->
-    <div class="history-list" id="historyList">
-      <h2>Recent Scans</h2>
     </div>
   </div>
 
-  <script>
-    const BROKER_SITES = [
-      'Spokeo', 'BeenVerified', 'Whitepages', 'Intelius', 'MyLife',
-      'FamilyTreeNow', 'PeekYou', 'Radaris', 'TruePeopleSearch', 'FastPeopleSearch'
-    ];
+  <div class="progress-wrap" id="progressWrap">
+    <div class="progress-header">
+      <span class="label" id="progressText">Starting scan...</span>
+      <span class="pct" id="progressPct">0%</span>
+    </div>
+    <div class="progress-bar"><div class="fill" id="progressFill"></div></div>
+  </div>
 
-    // Render broker results grid
-    function renderGrid() {
-      const grid = document.getElementById('resultsGrid');
-      grid.innerHTML = '';
-      BROKER_SITES.forEach(site => {
-        const card = document.createElement('div');
-        card.className = 'result-card';
-        card.id = `card-${site.replace(/[^a-zA-Z]/g, '')}`;
-        card.innerHTML = `
-          <div>
-            <div class="site">${site}</div>
-            <div class="detail" id="detail-${site.replace(/[^a-zA-Z]/g, '')}">Waiting to scan...</div>
-          </div>
-          <div class="actions">
-            <span class="status pending" id="status-${site.replace(/[^a-zA-Z]/g, '')}">Pending</span>
-          </div>
-        `;
-        grid.appendChild(card);
-      });
-    }
-    renderGrid();
+  <div class="summary-banner" id="summaryBanner">
+    <div class="summary-title">Scan Results</div>
+    <div class="stats" id="summaryStats"></div>
+  </div>
 
-    // Update individual card
-    function updateCard(site, status, detail, found) {
-      const key = site.replace(/[^a-zA-Z]/g, '');
-      const statusEl = document.getElementById(`status-${key}`);
-      const detailEl = document.getElementById(`detail-${key}`);
-      if (!statusEl) return;
+  <h2 class="section-title">&#x1F50D; Data Broker Scan Results</h2>
+  <div class="results-grid" id="resultsGrid"></div>
+</section>
 
-      statusEl.className = `status ${status}`;
-      statusEl.textContent = status.charAt(0).toUpperCase() + status.slice(1);
-      if (detail) detailEl.textContent = detail;
+<!-- HOW IT WORKS -->
+<section class="how-section" id="how-it-works">
+  <div class="container">
+    <h2>How It Works</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Free Scan</h3>
+        <p>Enter your name and email. We scan 10 major data broker sites to find where your information is exposed.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>See Your Exposure</h3>
+        <p>Get a clear report showing which sites have your address, phone number, or other personal data.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Automated Removal</h3>
+        <p>Start weekly monitoring. We submit optout requests automatically and track removal progress.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-      const card = document.getElementById(`card-${key}`);
-      if (card) {
-        const colors = {
-          exposed: 'var(--red)',
-          not_found: 'var(--green)',
-          cleared: 'var(--green)',
-          blocked: 'var(--amber)',
-          error: 'var(--red)',
-          scanning: 'var(--accent)',
-        };
-        card.style.borderLeftColor = colors[status] || 'var(--border)';
-        card.style.borderLeftWidth = '3px';
-        card.style.borderLeftStyle = 'solid';
-      }
-    }
+<!-- GUARANTEE -->
+<section class="container">
+  <div class="guarantee-section">
+    <div class="badge">&#x1F6E1;</div>
+    <h3>70% Removal Guarantee in 30 Days</h3>
+    <p>If we have not removed 70% of your tracked exposures within 30 days, you get your money back. No fine print.</p>
+  </div>
+</section>
 
-    // Start scan — POST returns UUID scan_id, then poll
-    async function startScan() {
-      const name = document.getElementById('scanName').value.trim();
-      const email = document.getElementById('scanEmail').value.trim();
-      if (!name || !email) return alert('Enter your name and email');
+<!-- TRUST -->
+<section class="trust-bar">
+  <div class="container">
+    <p>Backed by Privacy Frameworks You Trust</p>
+    <div class="logos">
+      <span>&#x1F1FA;&#x1F1F8; CCPA Compliant</span>
+      <span>&#x1F1EA;&#x1F1FA; GDPR Aligned</span>
+      <span>&#x1F30D; DROP Platform Ready</span>
+      <span>&#x1F6E1; 256-bit Encryption</span>
+    </div>
+  </div>
+</section>
 
-      const btn = document.getElementById('scanBtn');
-      btn.disabled = true;
-      btn.textContent = 'Scanning...';
+<!-- PRICING -->
+<section class="pricing-section" id="pricing">
+  <div class="container">
+    <h2>Remove Your Data. Keep It Gone.</h2>
+    <p class="pricing-sub">Weekly scans and automated optouts. Cancel anytime.</p>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="tier-name">Self-Serve</div>
+        <div class="price">$9.99 <span>/mo</span></div>
+        <p class="tier-desc">Weekly scans + automated optout requests</p>
+        <ul class="tier-features">
+          <li>Weekly 10-site scan</li>
+          <li>Automated optout submission</li>
+          <li>Email results and alerts</li>
+          <li>Cancel anytime</li>
+        </ul>
+        <a href="https://checkout.stripe.com/c/pay/cs_live_a1Ap6ydi6ZCKlopBnbyTpcAuPvM04taPjpVar2K84dOzrUg3wvwhJAH7Bi" target="_blank" class="pricing-cta">Start Protection</a>
+      </div>
+      <div class="pricing-card featured">
+        <div class="tier-name">Concierge</div>
+        <div class="price">$24.99 <span>/mo</span></div>
+        <p class="tier-desc">Everything + phoneverification handling</p>
+        <ul class="tier-features">
+          <li>Everything in Self-Serve</li>
+          <li>Phone-verify site handling</li>
+          <li>Priority removal queue</li>
+          <li>Personal removal report</li>
+        </ul>
+        <a href="https://checkout.stripe.com/c/pay/cs_live_a1dSe4GSgTjmZYh5mqFHtflx1DPndFZC8Jm8pORmTHkRpNqDMsdkSkpxl8" target="_blank" class="pricing-cta">Full Protection</a>
+      </div>
+    </div>
+  </div>
+</section>
 
-      document.getElementById('summaryBanner').classList.remove('show');
-      document.getElementById('progressWrap').classList.add('show');
-      document.getElementById('progressText').textContent = 'Starting scan...';
-      BROKER_SITES.forEach(s => updateCard(s, 'pending', 'Waiting...'));
+<!-- HISTORY -->
+<section class="container">
+  <div class="history-list" id="historyList"></div>
+</section>
 
-      try {
-        const res = await fetch('/api/datashield/scan', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name, email }),
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="links">
+      <a href="/about">About</a>
+      <a href="/privacy">Privacy Policy</a>
+      <a href="/terms">Terms of Service</a>
+      <a href="mailto:hello@datashieldnow.com">Contact</a>
+    </div>
+    <div class="copyright">&copy; 2026 DataShield. Automated Data Broker Removal Service.</div>
+  </div>
+</footer>
+
+<!-- JS -->
+<script>
+const BROKER_SITES = ['Spokeo','BeenVerified','Whitepages','Intelius','MyLife','FamilyTreeNow','PeekYou','Radaris','TruePeopleSearch','FastPeopleSearch'];
+
+function renderGrid(){
+  var grid=document.getElementById('resultsGrid');
+  grid.innerHTML='';
+  BROKER_SITES.forEach(function(site){
+    var key=site.replace(/[^a-zA-Z]/g,'');
+    var card=document.createElement('div');
+    card.className='result-card';
+    card.id='card-'+key;
+    card.innerHTML='<div><div class="site">'+site+'</div><div class="detail" id="detail-'+key+'">Waiting to scan...</div></div><div class="actions"><span class="status pending" id="status-'+key+'">Pending</span></div>';
+    grid.appendChild(card);
+  });
+}
+renderGrid();
+
+function updateCard(site,status,detail){
+  var key=site.replace(/[^a-zA-Z]/g,'');
+  var statusEl=document.getElementById('status-'+key);
+  var detailEl=document.getElementById('detail-'+key);
+  if(!statusEl)return;
+  statusEl.className='status '+status;
+  statusEl.textContent=status.charAt(0).toUpperCase()+status.slice(1);
+  if(detail)detailEl.textContent=detail;
+  var card=document.getElementById('card-'+key);
+  if(card){
+    var colors={exposed:'var(--red)',not_found:'var(--green)',cleared:'var(--green)',blocked:'var(--amber)',error:'var(--red)',scanning:'var(--accent)'};
+    card.style.borderLeftColor=colors[status]||'var(--border)';
+    card.style.borderLeftWidth='3px';
+    card.style.borderLeftStyle='solid';
+  }
+}
+
+async function startScan(){
+  var name=document.getElementById('scanName').value.trim();
+  var email=document.getElementById('scanEmail').value.trim();
+  if(!name||!email)return alert('Enter your name and email');
+  var btn=document.getElementById('scanBtn');
+  btn.disabled=true;
+  btn.textContent='Scanning...';
+  document.getElementById('summaryBanner').classList.remove('show');
+  document.getElementById('progressWrap').classList.add('show');
+  document.getElementById('progressText').textContent='Starting scan...';
+  document.getElementById('progressPct').textContent='0%';
+  document.getElementById('progressFill').style.width='0%';
+  BROKER_SITES.forEach(function(s){updateCard(s,'pending','Waiting...');});
+  try{
+    var res=await fetch('/api/datashield/scan',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:name,email:email})});
+    var data=await res.json();
+    if(!data.ok){alert('Error: '+data.error);btn.disabled=false;btn.textContent='Scan Now';return;}
+    pollScan(data.scan_id);
+  }catch(err){alert('Network error: '+err.message);btn.disabled=false;btn.textContent='Scan Now';}
+}
+
+function pollScan(scanId){
+  var iv=setInterval(async function(){
+    try{
+      var res=await fetch('/api/datashield/status?scan_id='+scanId);
+      var data=await res.json();
+      if(data.error){clearInterval(iv);return;}
+      var doneCount=0;
+      if(data.exposures){
+        data.exposures.forEach(function(r){
+          var map={exposed:'exposed',not_found:'cleared',blocked:'blocked',scanning:'scanning',error:'error'};
+          updateCard(r.site,map[r.status]||'pending',r.notes);
+          if(r.status==='exposed'||r.status==='not_found'||r.status==='blocked'||r.status==='error')doneCount++;
         });
-        const data = await res.json();
-        if (!data.ok) {
-          alert('Error: ' + data.error);
-          btn.disabled = false;
-          btn.textContent = 'Scan Now';
-          return;
-        }
-        // data.scan_id is a UUID — no sequential guessing
-        pollScan(data.scan_id);
-      } catch (err) {
-        alert('Network error: ' + err.message);
-        btn.disabled = false;
-        btn.textContent = 'Scan Now';
       }
-    }
-
-    // Poll status endpoint every 2 seconds
-    async function pollScan(scanId) {
-      const iv = setInterval(async () => {
-        try {
-          const res = await fetch(`/api/datashield/status?scan_id=${scanId}`);
-          const data = await res.json();
-          if (data.error) { clearInterval(iv); return; }
-
-          // Update each site from the exposures array
-          let doneCount = 0;
-          if (data.exposures) {
-            data.exposures.forEach(r => {
-              const statusMap = {
-                'exposed': 'exposed',
-                'not_found': 'cleared',
-                'blocked': 'blocked',
-                'scanning': 'scanning',
-                'error': 'error',
-              };
-              updateCard(r.site, statusMap[r.status] || 'pending', r.notes, r.found);
-              if (r.status === 'exposed' || r.status === 'not_found' || r.status === 'blocked' || r.status === 'error') {
-                doneCount++;
-              }
-            });
-          }
-
-          const total = data.scan.sites || 10;
-          const pct = Math.round((doneCount / total) * 100);
-          document.getElementById('progressFill').style.width = pct + '%';
-          document.getElementById('progressText').textContent = `Scanned ${doneCount} of ${total} sites...`;
-
-          // Complete
-          if (data.scan && data.scan.status === 'completed') {
-            clearInterval(iv);
-            document.getElementById('progressText').textContent = 'Scan complete!';
-            document.getElementById('progressFill').style.width = '100%';
-            document.getElementById('scanBtn').disabled = false;
-            document.getElementById('scanBtn').textContent = 'Scan Now';
-
-            if (data.scan.summary) {
-              const s = typeof data.scan.summary === 'string'
-                ? JSON.parse(data.scan.summary)
-                : data.scan.summary;
-              showSummary(s);
-            }
-            loadHistory();
-          }
-
-          // Failed
-          if (data.scan && data.scan.status === 'failed') {
-            clearInterval(iv);
-            document.getElementById('progressText').textContent = 'Scan failed';
-            document.getElementById('scanBtn').disabled = false;
-            document.getElementById('scanBtn').textContent = 'Scan Now';
-          }
-        } catch (err) {
-          // Swallow polling errors — keep retrying
+      var total=data.scan.sites||10;
+      var pct=Math.round((doneCount/total)*100);
+      document.getElementById('progressFill').style.width=pct+'%';
+      document.getElementById('progressPct').textContent=pct+'%';
+      document.getElementById('progressText').textContent='Scanned '+doneCount+' of '+total+' sites...';
+      if(data.scan&&data.scan.status==='completed'){
+        clearInterval(iv);
+        document.getElementById('progressText').textContent='Scan complete!';
+        document.getElementById('progressFill').style.width='100%';
+        document.getElementById('progressPct').textContent='100%';
+        btn=document.getElementById('scanBtn');
+        btn.disabled=false;
+        btn.textContent='Scan Now';
+        if(data.scan.summary){
+          var s=typeof data.scan.summary==='string'?JSON.parse(data.scan.summary):data.scan.summary;
+          showSummary(s);
         }
-      }, 2000);
-    }
+        loadHistory();
+      }
+      if(data.scan&&data.scan.status==='failed'){
+        clearInterval(iv);
+        document.getElementById('progressText').textContent='Scan failed';
+        btn=document.getElementById('scanBtn');
+        btn.disabled=false;
+        btn.textContent='Scan Now';
+      }
+    }catch(err){}
+  },2000);
+}
 
-    function showSummary(s) {
-      const banner = document.getElementById('summaryBanner');
-      banner.classList.add('show');
-      banner.querySelector('.stats').innerHTML = `
-        <div class="stat"><div class="num exposed">${s.exposed}</div><div class="label">Exposed</div></div>
-        <div class="stat"><div class="num cleared">${s.cleared}</div><div class="label">Clear</div></div>
-        <div class="stat"><div class="num blocked">${s.blocked}</div><div class="label">Blocked</div></div>
-        <div class="stat"><div class="num" style="color:var(--text-muted)">${s.errors}</div><div class="label">Errors</div></div>
-      `;
-    }
+function showSummary(s){
+  var banner=document.getElementById('summaryBanner');
+  banner.classList.add('show');
+  banner.querySelector('.stats').innerHTML=
+    '<div class="stat"><div class="num exposed">'+(s.exposed||0)+'</div><div class="label">Exposed</div></div>'+
+    '<div class="stat"><div class="num cleared">'+(s.cleared||0)+'</div><div class="label">Clear</div></div>'+
+    '<div class="stat"><div class="num blocked">'+(s.blocked||0)+'</div><div class="label">Blocked</div></div>'+
+    '<div class="stat"><div class="num" style="color:var(--text-muted)">'+(s.errors||0)+'</div><div class="label">Errors</div></div>';
+}
 
-    // Subscribe
-    async function subscribe() {
-      const email = document.getElementById('subEmail').value.trim();
-      if (!email) return alert('Enter your email');
-      await fetch('/api/datashield/subscribe', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, tier: 'free' })
-      });
-      alert('Subscribed! We\'ll keep you posted.');
-    }
+async function subscribe(){
+  var email=document.getElementById('subEmail').value.trim();
+  if(!email)return alert('Enter your email');
+  await fetch('/api/datashield/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email,tier:'free'})});
+  alert('Subscribed! We will keep you posted.');
+}
 
-    // Load history
-    async function loadHistory() {
-      const res = await fetch('/api/datashield/scans?limit=10');
-      const scans = await res.json();
-      const list = document.getElementById('historyList');
-      list.innerHTML = '<h2>Recent Scans</h2>';
-      scans.forEach(s => {
-        const item = document.createElement('div');
-        item.className = 'history-item';
-        item.innerHTML = `
-          <div>
-            <div class="email">${s.customer_name} (${s.customer_email})</div>
-            <div class="date">${s.started_at || ''}   ${s.status}</div>
-          </div>
-          <div style="font-size:0.75rem;color:var(--text-muted)">${s.summary ? s.summary.substring(0,60) : ''}</div>
-        `;
-        list.appendChild(item);
-      });
-    }
-    loadHistory();
-  </script>
-
-  <div class="footer" style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #2a2d3a; text-align: center; font-size: 0.8rem;">
-    <div class="links" style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin-bottom: 0.75rem;">
-      <a href="/about" style="color: #8a8fa8; text-decoration: none;">About</a>
-      <a href="/privacy" style="color: #8a8fa8; text-decoration: none;">Privacy Policy</a>
-      <a href="mailto:hello@datashieldnow.com" style="color: #8a8fa8; text-decoration: none;">Contact</a>
-    </div>
-    <p style="color: #5a5d6a; font-size: 0.75rem;">DataShield " Automated Data Broker Removal Service</p>
-  </div>
-
+async function loadHistory(){
+  try{
+    var res=await fetch('/api/datashield/scans?limit=10');
+    var scans=await res.json();
+    var list=document.getElementById('historyList');
+    list.innerHTML='<h2 class="section-title">Recent Scans</h2>';
+    scans.forEach(function(s){
+      var item=document.createElement('div');
+      item.className='history-item';
+      item.innerHTML='<div><div class="email">'+(s.customer_name||'')+' ('+(s.customer_email||'')+')</div><div class="date">'+(s.started_at||'')+' &mdash; '+s.status+'</div></div>';
+      list.appendChild(item);
+    });
+  }catch(e){}
+}
+loadHistory();
+</script>
 </body>
 </html>
