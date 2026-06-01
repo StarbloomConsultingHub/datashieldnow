@@ -7,35 +7,16 @@
     {
       "source": "/(.*)",
       "headers": [
-        {
-          "key": "X-Content-Type-Options",
-          "value": "nosniff"
-        },
-        {
-          "key": "X-Frame-Options",
-          "value": "DENY"
-        },
-        {
-          "key": "X-XSS-Protection",
-          "value": "1; mode=block"
-        },
-        {
-          "key": "Referrer-Policy",
-          "value": "strict-origin-when-cross-origin"
-        }
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "DENY" },
+        { "key": "X-XSS-Protection", "value": "1; mode=block" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
       ]
     }
   ],
-  "rewrites": [],
   "functions": {
-    "api/datashield/worker.js": {
-      "maxDuration": 120
-    },
-    "api/datashield/scan.js": {
-      "maxDuration": 30
-    },
-    "api/datashield/status.js": {
-      "maxDuration": 10
-    }
+    "api/worker.js": { "maxDuration": 120 },
+    "api/scan.js": { "maxDuration": 30 },
+    "api/status.js": { "maxDuration": 10 }
   }
 }

@@ -375,7 +375,7 @@ async function startScan(){
   document.getElementById('progressFill').style.width='0%';
   BROKER_SITES.forEach(function(s){updateCard(s,'pending','Waiting...');});
   try{
-    var res=await fetch('/api/datashield/scan',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:name,email:email})});
+    var res=await fetch('/api/scan',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:name,email:email})});
     var data=await res.json();
     if(!data.ok){alert('Error: '+data.error);btn.disabled=false;btn.textContent='Scan Now';return;}
     pollScan(data.scan_id);
@@ -385,7 +385,7 @@ async function startScan(){
 function pollScan(scanId){
   var iv=setInterval(async function(){
     try{
-      var res=await fetch('/api/datashield/status?scan_id='+scanId);
+      var res=await fetch('/api/status?scan_id='+scanId);
       var data=await res.json();
       if(data.error){clearInterval(iv);return;}
       var doneCount=0;
@@ -439,13 +439,13 @@ function showSummary(s){
 async function subscribe(){
   var email=document.getElementById('subEmail').value.trim();
   if(!email)return alert('Enter your email');
-  await fetch('/api/datashield/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email,tier:'free'})});
+  await fetch('/api/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email,tier:'free'})});
   alert('Subscribed! We will keep you posted.');
 }
 
 async function loadHistory(){
   try{
-    var res=await fetch('/api/datashield/scans?limit=10');
+    var res=await fetch('/api/scans?limit=10');
     var scans=await res.json();
     var list=document.getElementById('historyList');
     list.innerHTML='<h2 class="section-title">Recent Scans</h2>';
