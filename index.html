@@ -335,6 +335,14 @@
 </script>
 </head>
 <body>
+  <nav style="display:flex;align-items:center;justify-content:space-between;padding:0.75rem 0;border-bottom:1px solid var(--border);margin-bottom:1.5rem;">
+    <div style="font-weight:700;font-size:1.1rem;">🛡️ DataShield</div>
+    <div style="display:flex;gap:1.25rem;align-items:center;">
+      <a href="/" style="color:var(--text);text-decoration:none;font-size:0.85rem;">Home</a>
+      <a href="/about" style="color:var(--text-muted);text-decoration:none;font-size:0.85rem;">About</a>
+      <a href="mailto:hello@datashieldnow.com" style="color:var(--text-muted);text-decoration:none;font-size:0.85rem;">Contact</a>
+    </div>
+  </nav>
   <div class="container">
     <div class="header">
       <h1>🛡️ DataShield</h1>
@@ -374,7 +382,7 @@
     <!-- Subscribe -->
     <div class="subscribe-box">
       <h3>🔒 Keep Your Data Clean Automatically</h3>
-      <p>Get weekly scans and automated opt-out submissions. We monitor 10+ data broker sites and submit removal requests for you.</p>
+      <p>Get weekly scans and opt-out submissions. We monitor 200+ data broker sites and submit removal requests for you.</p>
       <div class="pricing">
         <div class="tier">
           <h4>Self-Serve</h4>
@@ -398,7 +406,7 @@
     <!-- Scan History -->
     <div class="history-list" id="historyList">
       <h2>Recent Scans &mdash; Covering 200+ Brokers</h2>
-      <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;">31 branded sites + automated sweep of the CA DPPA registry</p>
+      <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;">31 branded sites + full coverage of the CA DPPA registry</p>
     </div>
   <!-- Trust Signals -->
   <div class="container" style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border);">
@@ -447,14 +455,14 @@
         `;
         grid.appendChild(card);
       });
-      // Add a final card showing total sweep count
+      // Add a final card showing total count
       const sweepCard = document.createElement('div');
       sweepCard.className = 'result-card';
       sweepCard.style.opacity = '0.6';
       sweepCard.innerHTML = `
         <div>
           <div class="site">+200 more brokers</div>
-          <div class="detail">via automated email sweep (CA registry)</div>
+          <div class="detail">tracked via CA DPPA registry</div>
         </div>
         <div class="actions">
           <span class="status" style="background:rgba(56,189,248,0.15);color:var(--accent);font-size:0.7rem;">Covered</span>
